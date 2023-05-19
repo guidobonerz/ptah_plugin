@@ -36,7 +36,7 @@ public class SettingsConfigurable implements Configurable {
         if (settings != null) {
             modified = !settingsComponent.getPathToGeneratorExecutableText().equals(settings.pathToGeneratorExecutable);
             modified |= settingsComponent.getPathToConfigFileText().equals(settings.pathToConfigFile);
-            modified |= settingsComponent.getPathToInputFolderText().equals(settings.pathToInputFolder);
+            modified |= settingsComponent.getPathToInputFolderText().equals(settings.pathToTemplateFolder);
             modified |= settingsComponent.getPathToOutputFolderText().equals(settings.pathToOutputFolder);
             modified |= settingsComponent.isPurgeOutFolders() == settings.purgeOutFolders;
             modified |= settingsComponent.isRebuildOnConfigModification() == settings.rebuildOnConfigModification;
@@ -50,7 +50,7 @@ public class SettingsConfigurable implements Configurable {
         if (settings != null) {
             settings.pathToGeneratorExecutable = settingsComponent.getPathToGeneratorExecutableText();
             settings.pathToConfigFile = settingsComponent.getPathToConfigFileText();
-            settings.pathToInputFolder = settingsComponent.getPathToInputFolderText();
+            settings.pathToTemplateFolder = settingsComponent.getPathToInputFolderText();
             settings.pathToOutputFolder = settingsComponent.getPathToOutputFolderText();
             settings.purgeOutFolders = settingsComponent.isPurgeOutFolders();
             settings.rebuildOnConfigModification = settingsComponent.isRebuildOnConfigModification();
@@ -63,7 +63,7 @@ public class SettingsConfigurable implements Configurable {
         if (settings != null) {
             settingsComponent.setPathToGeneratorExecutableText(settings.pathToGeneratorExecutable);
             settingsComponent.setConfigFileText(settings.pathToConfigFile);
-            settingsComponent.setInputFolderText(settings.pathToInputFolder);
+            settingsComponent.setInputFolderText(settings.pathToTemplateFolder);
             settingsComponent.setOutputFolderText(settings.pathToOutputFolder);
             settingsComponent.setPurgeOutputFolders(settings.purgeOutFolders);
             settingsComponent.setRebuildOnConfigModification(settings.rebuildOnConfigModification);

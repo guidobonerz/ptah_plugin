@@ -1,5 +1,10 @@
 package de.drazil.ptah.settings;
 
+import com.intellij.ide.DataManager;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.ui.components.JBCheckBox;
 import com.intellij.ui.components.JBLabel;
@@ -14,8 +19,9 @@ public class SettingsComponent {
     private JPanel mainPanel;
     private TextFieldWithBrowseButton pathToGeneratorExecutableTextField;
     //private JBTextField pathToGeneratorExecutableTextField;
+    private JBTextField projectPathTextField;
     private JBTextField configFileTextField;
-    private JBTextField inputFolderTextField;
+    private JBTextField templateFolderTextField;
     private JBTextField outputFolderTextField;
     private JBCheckBox purgeOutputFoldersCheckBox;
     private JBCheckBox rebuildOnConfigModificationCheckBox;
@@ -23,9 +29,10 @@ public class SettingsComponent {
     public SettingsComponent() {
 
         mainPanel = FormBuilder.createFormBuilder()
+                .addLabeledComponent("project path", getProjectPathTextField(), 1, true)
                 .addLabeledComponent("Path to executable", getPathToGeneratorExecutableTextField(), 1, true)
                 .addLabeledComponent("Path to configuration file", getConfigFileTextField(), 1, true)
-                .addLabeledComponent("Path to inputfolder", getInputFolderTextField(), 1, true)
+                .addLabeledComponent("Path to templatefolder", getTemplateFolderTextField(), 1, true)
                 .addLabeledComponent("Path to outputfolder", getOutputFolderTextField(), 1, true)
                 .addComponent(getPurgeOutputFoldersCheckBox(), 0)
                 .addComponent(getRebuildOnConfigModificationCheckBox(), 0)
@@ -35,10 +42,20 @@ public class SettingsComponent {
 
     private TextFieldWithBrowseButton getPathToGeneratorExecutableTextField() {
         if (pathToGeneratorExecutableTextField == null) {
-            //pathToGeneratorExecutableTextField = new JBTextField();
             pathToGeneratorExecutableTextField = new TextFieldWithBrowseButton();
         }
         return pathToGeneratorExecutableTextField;
+    }
+
+    private JBTextField getProjectPathTextField() {
+        if (projectPathTextField == null) {
+            projectPathTextField = new JBTextField();
+            DataContext dataContext = DataManager.getInstance().getDataContext();
+            Project project = (Project) dataContext.getData(PlatformDataKeys.PROJECT);
+            projectPathTextField.setText(project.getBasePath());
+            projectPathTextField.setEditable(false);
+        }
+        return projectPathTextField;
     }
 
     private JBTextField getConfigFileTextField() {
@@ -48,11 +65,11 @@ public class SettingsComponent {
         return configFileTextField;
     }
 
-    private JBTextField getInputFolderTextField() {
-        if (inputFolderTextField == null) {
-            inputFolderTextField = new JBTextField();
+    private JBTextField getTemplateFolderTextField() {
+        if (templateFolderTextField == null) {
+            templateFolderTextField = new JBTextField();
         }
-        return inputFolderTextField;
+        return templateFolderTextField;
     }
 
     private JBTextField getOutputFolderTextField() {
@@ -97,7 +114,7 @@ public class SettingsComponent {
 
     @NotNull
     public String getPathToInputFolderText() {
-        return getInputFolderTextField().getText();
+        return getTemplateFolderTextField().getText();
     }
 
     @NotNull
@@ -114,7 +131,7 @@ public class SettingsComponent {
     }
 
     public void setInputFolderText(@NotNull String newText) {
-        getInputFolderTextField().setText(newText);
+        getTemplateFolderTextField().setText(newText);
     }
 
     public void setOutputFolderText(@NotNull String newText) {

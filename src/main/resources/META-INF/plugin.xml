@@ -28,10 +28,10 @@
         <projectService serviceImplementation="de.drazil.ptah.settings.SettingsState"/>
 
     </extensions>
-<!--
+
     <applicationListeners>
         <listener
                 class="de.drazil.ptah.ConfigListener"
                 topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
-    </applicationListeners>-->
+    </applicationListeners>
 </idea-plugin>

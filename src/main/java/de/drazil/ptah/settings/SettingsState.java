@@ -21,7 +21,7 @@ public class SettingsState implements PersistentStateComponent<SettingsState> {
 
     public String pathToGeneratorExecutable = "<change me>";
     public String pathToConfigFile = "<change me>";
-    public String pathToInputFolder = "<change me>";
+    public String pathToTemplateFolder = "templates/";
     public String pathToOutputFolder = "<change me>";
     public boolean purgeOutFolders = false;
     public boolean rebuildOnConfigModification = false;
