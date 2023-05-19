@@ -1,18 +1,19 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.guidobonerz.ptahplugin</id>
-    <name>ptah_plugin Template</name>
-    <vendor>guidobonerz</vendor>
-
+    <id>de.drazil.ptah</id>
+    <name>Ptah</name>
     <depends>com.intellij.modules.platform</depends>
-
-    <resource-bundle>messages.MyBundle</resource-bundle>
-
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page.
+    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">YourCompany</vendor>-->
+    <description><![CDATA[
+    Template based Codegenerator
+  ]]></description>
+    <depends>com.intellij.modules.platform</depends>
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.guidobonerz.ptahplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <!--<toolWindow id="Ptah" secondary="true" icon="AllIcons.Toolwindows.WebToolWindow" anchor="right"
+                    factoryClass="de.drazil.ptah.Ptah"/>-->
+        <applicationConfigurable parentId="tools" instance="de.drazil.ptah.settings.AppSettingsConfigurable"
+                                 id="de.drazil.ptah.settings.AppSettingsConfigurable"
+                                 displayName="Ptah: Code Generator"/>
+        <applicationService serviceImplementation="de.drazil.ptah.settings.AppSettingsState"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.guidobonerz.ptahplugin.listeners.MyFrameStateListener" topic="com.intellij.ide.FrameStateListener"/>
-    </applicationListeners>
 </idea-plugin>
