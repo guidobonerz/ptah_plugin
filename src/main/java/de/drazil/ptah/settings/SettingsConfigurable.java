@@ -7,9 +7,9 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 
-public class AppSettingsConfigurable implements Configurable {
+public class SettingsConfigurable implements Configurable {
 
-    private AppSettingsComponent settingsComponent;
+    private SettingsComponent settingsComponent;
 
     @Nls(capitalization = Nls.Capitalization.Title)
     @Override
@@ -25,13 +25,13 @@ public class AppSettingsConfigurable implements Configurable {
     @Nullable
     @Override
     public JComponent createComponent() {
-        settingsComponent = new AppSettingsComponent();
+        settingsComponent = new SettingsComponent();
         return settingsComponent.getPanel();
     }
 
     @Override
     public boolean isModified() {
-        AppSettingsState settings = AppSettingsState.getInstance();
+        SettingsState settings = SettingsState.getInstance();
         boolean modified = !settingsComponent.getPathToGeneratorExecutableText().equals(settings.pathToGeneratorExecutable);
         modified |= settingsComponent.getPathToConfigFileText().equals(settings.pathToConfigFile);
         modified |= settingsComponent.getPathToInputFolderText().equals(settings.pathToInputFolder);
@@ -43,7 +43,7 @@ public class AppSettingsConfigurable implements Configurable {
 
     @Override
     public void apply() {
-        AppSettingsState settings = AppSettingsState.getInstance();
+        SettingsState settings = SettingsState.getInstance();
         settings.pathToGeneratorExecutable = settingsComponent.getPathToGeneratorExecutableText();
         settings.pathToConfigFile = settingsComponent.getPathToConfigFileText();
         settings.pathToInputFolder = settingsComponent.getPathToInputFolderText();
@@ -54,7 +54,7 @@ public class AppSettingsConfigurable implements Configurable {
 
     @Override
     public void reset() {
-        AppSettingsState settings = AppSettingsState.getInstance();
+        SettingsState settings = SettingsState.getInstance();
         settingsComponent.setPathToGeneratorExecutableText(settings.pathToGeneratorExecutable);
         settingsComponent.setConfigFileText(settings.pathToConfigFile);
         settingsComponent.setInputFolderText(settings.pathToInputFolder);

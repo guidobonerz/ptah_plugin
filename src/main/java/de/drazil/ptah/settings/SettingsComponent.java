@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
-public class AppSettingsComponent {
+public class SettingsComponent {
     private JPanel mainPanel;
     private JBTextField pathToGeneratorExecutableTextField;
     private JBTextField configFileTextField;
@@ -17,7 +17,7 @@ public class AppSettingsComponent {
     private JBCheckBox purgeOutputFoldersCheckBox;
     private JBCheckBox rebuildOnConfigModificationCheckBox;
 
-    public AppSettingsComponent() {
+    public SettingsComponent() {
         mainPanel = FormBuilder.createFormBuilder()
                 .addLabeledComponent(new JBLabel("Path to executable"), getPathToGeneratorExecutableTextField(), 1, true)
                 .addLabeledComponent(new JBLabel("Path to configuration file"), getConfigFileTextField(), 1, true)

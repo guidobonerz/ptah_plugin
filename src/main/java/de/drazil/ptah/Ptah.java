@@ -19,7 +19,6 @@ import java.awt.event.ActionListener;
 
 public class Ptah implements ToolWindowFactory {
 
-    private JButton button;
     private JBTextField configFileTextField;
     private JBTextField inputFolderTextField;
     private JBTextField outputFolderTextField;
@@ -76,20 +75,6 @@ public class Ptah implements ToolWindowFactory {
         return rebuildOnConfigModificationCheckBox;
     }
 
-    private JButton getButton() {
-        if (button == null) {
-            button = new JButton("Click me!");
-            button.setEnabled(true);
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    Messages.showInfoMessage("Clicked", "Info");
-                    ConsoleView consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).getConsole();
-                    consoleView.print("Button Clicked", ConsoleViewContentType.NORMAL_OUTPUT);
-                }
-            });
-        }
-        return button;
-    }
+
 }
 
