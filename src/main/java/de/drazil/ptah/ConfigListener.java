@@ -20,7 +20,6 @@ public class ConfigListener implements BulkFileListener {
                 VirtualFile vf = event.getFile();
                 DataContext dataContext = DataManager.getInstance().getDataContext();
                 Project project = (Project) dataContext.getData(PlatformDataKeys.PROJECT);
-
                 System.out.printf("project:%s / %s has been changed.\n", project.getName(), vf.getName());
             }
         }

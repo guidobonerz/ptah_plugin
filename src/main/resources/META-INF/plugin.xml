@@ -2,34 +2,36 @@
     <id>de.drazil.ptah</id>
     <name>Ptah</name>
     <depends>com.intellij.modules.platform</depends>
-    <!--<vendor email="support@yourcompany.com" url="https://www.yourcompany.com">YourCompany</vendor>-->
+    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">Gonero Buidz</vendor>
     <description><![CDATA[
     Template based Codegenerator
   ]]></description>
     <depends>com.intellij.modules.platform</depends>
-    <depends>org.jetbrains.plugins.terminal</depends>
+
     <extensions defaultExtensionNs="com.intellij">
-        <!--<toolWindow id="Ptah" secondary="true" icon="AllIcons.Toolwindows.WebToolWindow" anchor="right"
-                    factoryClass="de.drazil.ptah.Ptah"/>-->
+        <toolWindow id="Ptah" secondary="true" icon="AllIcons.Toolwindows.WebToolWindow" anchor="right"
+                    factoryClass="de.drazil.ptah.Ptah"/>
+
         <!--
          <applicationConfigurable parentId="tools" instance="de.drazil.ptah.settings.SettingsConfigurable"
                                   id="de.drazil.ptah.settings.SettingsConfigurable"
                                   displayName="Ptah: Code Generator"/>
+
          <applicationService serviceImplementation="de.drazil.ptah.settings.AppSettingsState"/>
  -->
         <projectConfigurable
                 parentId="tools"
                 instance="de.drazil.ptah.settings.SettingsConfigurable"
-                id="de.drazil.ptah.settings.ProjectSettingsConfigurable"
-                displayName="Ptah Code Generator : Project Settings"
+                id="de.drazil.ptah.settings.SettingsConfigurable"
+                displayName="Ptah Code Generator"
                 nonDefaultProject="true"/>
         <projectService serviceImplementation="de.drazil.ptah.settings.SettingsState"/>
 
     </extensions>
-
+<!--
     <applicationListeners>
         <listener
                 class="de.drazil.ptah.ConfigListener"
                 topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
-    </applicationListeners>
+    </applicationListeners>-->
 </idea-plugin>

@@ -10,7 +10,9 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.components.JBCheckBox;
+import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBTextField;
+import com.intellij.util.ui.FormBuilder;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -18,63 +20,33 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Ptah implements ToolWindowFactory {
-
-    private JBTextField configFileTextField;
-    private JBTextField inputFolderTextField;
-    private JBTextField outputFolderTextField;
-    private JBCheckBox purgeOutputFoldersCheckBox;
-    private JBCheckBox rebuildOnConfigModificationCheckBox;
-    private Project project;
+    private JPanel mainPanel;
+    private JButton startGeneratorButton;
 
     @Override
+
     public void createToolWindowContent(com.intellij.openapi.project.Project project, com.intellij.openapi.wm.ToolWindow toolWindow) {
-        this.project = project;
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new VerticalFlowLayout());
-        panel.add(getConfigFileTextField());
-        panel.add(getInputFolderTextField());
-        panel.add(getOutputFolderTextField());
-        panel.add(getPurgeOutputFoldersCheckBox());
-        panel.add(getRebuildOnConfigModificationCheckBox());
-        toolWindow.getComponent().add(panel);
+        mainPanel = FormBuilder.createFormBuilder()
+                .addComponent(getStartGeneratorButton(), 0)
+                .addComponentFillVertically(new JPanel(), 0)
+                .getPanel();
+        toolWindow.getComponent().add(mainPanel);
+
     }
 
-    private JBTextField getConfigFileTextField() {
-        if (configFileTextField == null) {
-            configFileTextField = new JBTextField();
+    private JButton getStartGeneratorButton() {
+        if (startGeneratorButton == null) {
+            startGeneratorButton = new JButton("Start code generation");
+            startGeneratorButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                System.out.println("generator started...");
+                }
+            });
         }
-        return configFileTextField;
+        return startGeneratorButton;
     }
-
-    private JBTextField getInputFolderTextField() {
-        if (inputFolderTextField == null) {
-            inputFolderTextField = new JBTextField();
-        }
-        return inputFolderTextField;
-    }
-
-    private JBTextField getOutputFolderTextField() {
-        if (outputFolderTextField == null) {
-            outputFolderTextField = new JBTextField();
-        }
-        return outputFolderTextField;
-    }
-
-    private JBCheckBox getPurgeOutputFoldersCheckBox() {
-        if (purgeOutputFoldersCheckBox == null) {
-            purgeOutputFoldersCheckBox = new JBCheckBox("Purge folders before build?");
-        }
-        return purgeOutputFoldersCheckBox;
-    }
-
-    private JBCheckBox getRebuildOnConfigModificationCheckBox() {
-        if (rebuildOnConfigModificationCheckBox == null) {
-            rebuildOnConfigModificationCheckBox = new JBCheckBox("Rebuild on change config?");
-        }
-        return rebuildOnConfigModificationCheckBox;
-    }
-
 
 }
 

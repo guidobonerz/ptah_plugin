@@ -1,16 +1,19 @@
 package de.drazil.ptah.settings;
 
+import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.ui.components.JBCheckBox;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBTextField;
 import com.intellij.util.ui.FormBuilder;
+import com.jetbrains.JBRFileDialog;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 public class SettingsComponent {
     private JPanel mainPanel;
-    private JBTextField pathToGeneratorExecutableTextField;
+    private TextFieldWithBrowseButton pathToGeneratorExecutableTextField;
+    //private JBTextField pathToGeneratorExecutableTextField;
     private JBTextField configFileTextField;
     private JBTextField inputFolderTextField;
     private JBTextField outputFolderTextField;
@@ -18,20 +21,22 @@ public class SettingsComponent {
     private JBCheckBox rebuildOnConfigModificationCheckBox;
 
     public SettingsComponent() {
+
         mainPanel = FormBuilder.createFormBuilder()
-                .addLabeledComponent(new JBLabel("Path to executable"), getPathToGeneratorExecutableTextField(), 1, true)
-                .addLabeledComponent(new JBLabel("Path to configuration file"), getConfigFileTextField(), 1, true)
-                .addLabeledComponent(new JBLabel("Path to inputfolder"), getInputFolderTextField(), 1, true)
-                .addLabeledComponent(new JBLabel("Path to outputfolder"), getOutputFolderTextField(), 1, true)
+                .addLabeledComponent("Path to executable", getPathToGeneratorExecutableTextField(), 1, true)
+                .addLabeledComponent("Path to configuration file", getConfigFileTextField(), 1, true)
+                .addLabeledComponent("Path to inputfolder", getInputFolderTextField(), 1, true)
+                .addLabeledComponent("Path to outputfolder", getOutputFolderTextField(), 1, true)
                 .addComponent(getPurgeOutputFoldersCheckBox(), 0)
                 .addComponent(getRebuildOnConfigModificationCheckBox(), 0)
                 .addComponentFillVertically(new JPanel(), 0)
                 .getPanel();
     }
 
-    private JBTextField getPathToGeneratorExecutableTextField() {
+    private TextFieldWithBrowseButton getPathToGeneratorExecutableTextField() {
         if (pathToGeneratorExecutableTextField == null) {
-            pathToGeneratorExecutableTextField = new JBTextField();
+            //pathToGeneratorExecutableTextField = new JBTextField();
+            pathToGeneratorExecutableTextField = new TextFieldWithBrowseButton();
         }
         return pathToGeneratorExecutableTextField;
     }
