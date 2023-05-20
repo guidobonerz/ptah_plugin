@@ -73,9 +73,6 @@ public class SettingsComponent {
                                 pathToGeneratorExecutableTextField.setText(path);
                             }
                     );
-
-
-                    System.out.println("click");
                 }
             });
         }
