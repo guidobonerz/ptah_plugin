@@ -13,19 +13,19 @@
                     factoryClass="de.drazil.ptah.Ptah"/>
 
         <!--
-         <applicationConfigurable parentId="tools" instance="de.drazil.ptah.settings.SettingsConfigurable"
-                                  id="de.drazil.ptah.settings.SettingsConfigurable"
+         <applicationConfigurable parentId="tools" instance="de.drazil.ptah.settings.PtahSettingsConfigurable"
+                                  id="de.drazil.ptah.settings.PtahSettingsConfigurable"
                                   displayName="Ptah: Code Generator"/>
 
          <applicationService serviceImplementation="de.drazil.ptah.settings.AppSettingsState"/>
  -->
         <projectConfigurable
-                parentId="tools"
-                instance="de.drazil.ptah.settings.SettingsConfigurable"
-                id="de.drazil.ptah.settings.SettingsConfigurable"
+                parentId="build.tools"
+                instance="de.drazil.ptah.settings.PtahSettingsConfigurable"
+                id="de.drazil.ptah.settings.PtahSettingsConfigurable"
                 displayName="Ptah Code Generator"
                 nonDefaultProject="true"/>
-        <projectService serviceImplementation="de.drazil.ptah.settings.SettingsState"/>
+        <projectService serviceImplementation="de.drazil.ptah.settings.PtahProjectSettingsProvider"/>
 
     </extensions>
 

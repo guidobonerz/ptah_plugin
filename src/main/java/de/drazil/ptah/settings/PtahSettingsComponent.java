@@ -5,28 +5,21 @@ import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.fileChooser.*;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.ui.TextBrowseFolderListener;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBCheckBox;
-import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBTextField;
 import com.intellij.util.ui.FormBuilder;
-import com.jetbrains.JBRFileDialog;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Optional;
 
 
-public class SettingsComponent {
+public class PtahSettingsComponent {
     private JPanel mainPanel;
     private TextFieldWithBrowseButton pathToGeneratorExecutableTextField;
     //private JBTextField pathToGeneratorExecutableTextField;
@@ -38,7 +31,7 @@ public class SettingsComponent {
     private JBCheckBox rebuildOnConfigModificationCheckBox;
     private FileChooserDescriptor descriptor;
 
-    public SettingsComponent() {
+    public PtahSettingsComponent() {
 
         mainPanel = FormBuilder.createFormBuilder()
                 .addLabeledComponent("project path", getProjectPathTextField(), 1, true)
@@ -85,7 +78,7 @@ public class SettingsComponent {
             DataContext dataContext = DataManager.getInstance().getDataContext();
             Project project = (Project) dataContext.getData(PlatformDataKeys.PROJECT);
             projectPathTextField.setText(project.getBasePath());
-            projectPathTextField.setEditable(false);
+            projectPathTextField.setEnabled(false);
         }
         return projectPathTextField;
     }
