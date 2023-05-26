@@ -1,10 +1,11 @@
 package de.drazil.ptah.settings;
 
 public class PtahProjectSettings {
-    public String pathToGeneratorExecutable = "<change me>";
-    public String pathToConfigFile = "<change me>";
+    public String pathToGeneratorExecutable = "ptah.exe";
+    public String pathToConfigFile = "ptah-config.json";
     public String pathToTemplateFolder = "templates/";
-    public String pathToOutputFolder = "<change me>";
-    public boolean purgeOutFolders = false;
-    public boolean rebuildOnConfigModification = false;
+    public String pathToOutputFolder = "src/main/java/";
+    public boolean purgeOutFolders = true;
+    public boolean rebuildOnConfigModification = true;
+    public boolean confirmActions = true;
 }

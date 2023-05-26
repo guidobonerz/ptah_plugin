@@ -53,6 +53,7 @@ public class PtahSettingsConfigurable implements SearchableConfigurable {
         modified |= settingsComponent.getPathToOutputFolderText().equals(ps.pathToOutputFolder);
         modified |= settingsComponent.isPurgeOutFolders() == ps.purgeOutFolders;
         modified |= settingsComponent.isRebuildOnConfigModification() == ps.rebuildOnConfigModification;
+        modified |= settingsComponent.isConfirmActions() == ps.rebuildOnConfigModification;
         return modified;
     }
 
@@ -65,6 +66,7 @@ public class PtahSettingsConfigurable implements SearchableConfigurable {
         ps.pathToOutputFolder = settingsComponent.getPathToOutputFolderText();
         ps.purgeOutFolders = settingsComponent.isPurgeOutFolders();
         ps.rebuildOnConfigModification = settingsComponent.isRebuildOnConfigModification();
+        ps.confirmActions = settingsComponent.isConfirmActions();
     }
 
     @Override
@@ -76,6 +78,7 @@ public class PtahSettingsConfigurable implements SearchableConfigurable {
         settingsComponent.setOutputFolderText(ps.pathToOutputFolder);
         settingsComponent.setPurgeOutputFolders(ps.purgeOutFolders);
         settingsComponent.setRebuildOnConfigModification(ps.rebuildOnConfigModification);
+        settingsComponent.setConfirmActions(ps.confirmActions);
     }
 
 

@@ -29,18 +29,20 @@ public class PtahSettingsComponent {
     private JBTextField outputFolderTextField;
     private JBCheckBox purgeOutputFoldersCheckBox;
     private JBCheckBox rebuildOnConfigModificationCheckBox;
+    private JBCheckBox confirmActionsCheckBox;
     private FileChooserDescriptor descriptor;
 
     public PtahSettingsComponent() {
 
         mainPanel = FormBuilder.createFormBuilder()
-                .addLabeledComponent("project path", getProjectPathTextField(), 1, true)
-                .addLabeledComponent("Path to executable", getPathToGeneratorExecutableTextField(), 1, true)
-                .addLabeledComponent("Path to configuration file", getConfigFileTextField(), 1, true)
-                .addLabeledComponent("Path to templatefolder", getTemplateFolderTextField(), 1, true)
-                .addLabeledComponent("Path to outputfolder", getOutputFolderTextField(), 1, true)
+                .addLabeledComponent("Project path", getProjectPathTextField(), 1, true)
+                .addLabeledComponent("Executable", getPathToGeneratorExecutableTextField(), 1, true)
+                .addLabeledComponent("Configuration file", getConfigFileTextField(), 1, true)
+                .addLabeledComponent("Templatefolder", getTemplateFolderTextField(), 1, true)
+                .addLabeledComponent("Outputfolder", getOutputFolderTextField(), 1, true)
                 .addComponent(getPurgeOutputFoldersCheckBox(), 0)
                 .addComponent(getRebuildOnConfigModificationCheckBox(), 0)
+                .addComponent(getConfirmActionsCheckBox(), 0)
                 .addComponentFillVertically(new JPanel(), 0)
                 .getPanel();
     }
@@ -113,9 +115,16 @@ public class PtahSettingsComponent {
 
     private JBCheckBox getRebuildOnConfigModificationCheckBox() {
         if (rebuildOnConfigModificationCheckBox == null) {
-            rebuildOnConfigModificationCheckBox = new JBCheckBox("Rebuild on change config");
+            rebuildOnConfigModificationCheckBox = new JBCheckBox("Automatic rebuild on change config");
         }
         return rebuildOnConfigModificationCheckBox;
+    }
+
+    private JBCheckBox getConfirmActionsCheckBox() {
+        if (confirmActionsCheckBox == null) {
+            confirmActionsCheckBox = new JBCheckBox("Confirm actions");
+        }
+        return confirmActionsCheckBox;
     }
 
 
@@ -163,21 +172,33 @@ public class PtahSettingsComponent {
         getOutputFolderTextField().setText(newText);
     }
 
+    public void setPurgeOutputFolders(boolean newStatus) {
+        getPurgeOutputFoldersCheckBox().setSelected(newStatus);
+    }
 
     public boolean isPurgeOutFolders() {
         return getPurgeOutputFoldersCheckBox().isSelected();
-    }
-
-    public void setPurgeOutputFolders(boolean newStatus) {
-        getPurgeOutputFoldersCheckBox().setSelected(newStatus);
     }
 
     public boolean isRebuildOnConfigModification() {
         return getRebuildOnConfigModificationCheckBox().isSelected();
     }
 
+    public boolean isConfirmActions() {
+        return getConfirmActionsCheckBox().isSelected();
+    }
+
+
+    public void setPurgeFolders(boolean newStatus) {
+        getRebuildOnConfigModificationCheckBox().setSelected(newStatus);
+    }
+
     public void setRebuildOnConfigModification(boolean newStatus) {
         getRebuildOnConfigModificationCheckBox().setSelected(newStatus);
+    }
+
+    public void setConfirmActions(boolean newStatus) {
+        getConfirmActionsCheckBox().setSelected(newStatus);
     }
 
 }
