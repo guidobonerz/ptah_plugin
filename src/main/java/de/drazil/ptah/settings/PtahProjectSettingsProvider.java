@@ -9,21 +9,23 @@ import org.jetbrains.annotations.Nullable;
 
 
 @State(
-        name = "SettingsState",
+        name = "PtahProjectSettings",
         storages = {
-                @Storage("/ptah.xml")
+                @Storage("./ptah.xml")
         }
 )
 public class PtahProjectSettingsProvider implements PersistentStateComponent<PtahProjectSettings> {
 
+    private PtahProjectSettings settings = new PtahProjectSettings();
+
     public static PtahProjectSettingsProvider getInstance(Project project) {
-        return new PtahProjectSettingsProvider();
+        return ServiceManager.getService(project, PtahProjectSettingsProvider.class);
     }
 
     @Nullable
     @Override
     public PtahProjectSettings getState() {
-        return new PtahProjectSettings();
+        return settings;
     }
 
     @Override
