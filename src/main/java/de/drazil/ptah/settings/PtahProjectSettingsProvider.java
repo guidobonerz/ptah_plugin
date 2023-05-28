@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 
 @State(
-        name = "PtahProjectSettings",
+        name = "PtahProjectSettingsProvider",
         storages = {
                 @Storage("./ptah.xml")
         }
@@ -30,7 +30,7 @@ public class PtahProjectSettingsProvider implements PersistentStateComponent<Pta
 
     @Override
     public void loadState(@NotNull PtahProjectSettings state) {
-        XmlSerializerUtil.copyBean(state, this);
+        XmlSerializerUtil.copyBean(state, settings);
     }
 
 }
