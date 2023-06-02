@@ -5,12 +5,12 @@ import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.util.messages.MessageBus;
 import org.jetbrains.annotations.NotNull;
 
-public class TemplateProcessor implements StartupActivity {
+public class PtahStartupActivity implements StartupActivity {
 
     @Override
     public void runActivity(@NotNull Project project) {
         MessageBus mb = project.getMessageBus();
-        mb.connect().subscribe(RunCodeGeneratorTopic.RUN_CODE_GENERATOR_TOPIC, new RunCodeGeneratorTopic() {
+        mb.connect().subscribe(PtahActionTopic.RUN_CODE_GENERATOR_TOPIC, new PtahActionTopic() {
             @Override
             public void generateCode() {
                 System.out.println("run code generator");

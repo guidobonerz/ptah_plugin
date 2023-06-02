@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ConfigListener implements BulkFileListener {
+public class PtahChangeListener implements BulkFileListener {
 
     @Override
     public void after(@NotNull List<? extends VFileEvent> events) {
@@ -30,7 +30,7 @@ public class ConfigListener implements BulkFileListener {
                 String configFile = String.format("%s/%s", project.getBasePath(), settings.pathToConfigFile);
                 if (configFile.equals(vf.getPath())) {
                     MessageBus messageBus = project.getMessageBus();
-                    RunCodeGeneratorTopic publisher = messageBus.syncPublisher(RunCodeGeneratorTopic.RUN_CODE_GENERATOR_TOPIC);
+                    PtahActionTopic publisher = messageBus.syncPublisher(PtahActionTopic.RUN_CODE_GENERATOR_TOPIC);
                     publisher.generateCode();
                 }
             }

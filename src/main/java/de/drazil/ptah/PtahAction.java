@@ -8,13 +8,13 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
 
-public class RunCodeGeneratorAction extends AnAction {
+public class PtahAction extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent e) {
         DataContext dataContext = DataManager.getInstance().getDataContext();
         Project project = (Project) dataContext.getData(PlatformDataKeys.PROJECT);
         MessageBus messageBus = project.getMessageBus();
-        RunCodeGeneratorTopic publisher = messageBus.syncPublisher(RunCodeGeneratorTopic.RUN_CODE_GENERATOR_TOPIC);
+        PtahActionTopic publisher = messageBus.syncPublisher(PtahActionTopic.RUN_CODE_GENERATOR_TOPIC);
         publisher.generateCode();
     }
 }

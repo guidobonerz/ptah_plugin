@@ -10,7 +10,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="Code Generator" secondary="true" icon="PtahIcons.Wand" anchor="right"
-                    factoryClass="de.drazil.ptah.Ptah"/>
+                    factoryClass="de.drazil.ptah.PtahTool"/>
         <!--
          <applicationConfigurable parentId="tools" instance="de.drazil.ptah.settings.PtahSettingsConfigurable"
                                   id="de.drazil.ptah.settings.PtahSettingsConfigurable"
@@ -25,10 +25,10 @@
                 displayName="Ptah Code Generator"
                 nonDefaultProject="true"/>
         <projectService serviceImplementation="de.drazil.ptah.settings.PtahProjectSettingsProvider"/>
-        <postStartupActivity implementation="de.drazil.ptah.TemplateProcessor"/>
+        <postStartupActivity implementation="de.drazil.ptah.PtahStartupActivity"/>
     </extensions>
     <actions>
-        <action id="de.drazil.ptah.runCodeGenerator" class="de.drazil.ptah.RunCodeGeneratorAction"
+        <action id="de.drazil.ptah.runCodeGenerator" class="de.drazil.ptah.PtahAction"
                 text="Run Code Generator"
                 description="RunCodeGeneratorAction" icon="PtahIcons.Wand">
             <keyboard-shortcut
@@ -40,7 +40,7 @@
     </actions>
     <applicationListeners>
         <listener
-                class="de.drazil.ptah.ConfigListener"
+                class="de.drazil.ptah.PtahChangeListener"
                 topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
     </applicationListeners>
 </idea-plugin>
