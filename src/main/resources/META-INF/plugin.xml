@@ -40,7 +40,7 @@
     </actions>
     <applicationListeners>
         <listener
-                class="de.drazil.ptah.PtahChangeListener"
+                class="de.drazil.ptah.ConfigListener"
                 topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
     </applicationListeners>
 </idea-plugin>

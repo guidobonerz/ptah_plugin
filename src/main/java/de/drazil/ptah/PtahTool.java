@@ -1,7 +1,15 @@
 package de.drazil.ptah;
 
+import com.intellij.ide.DataManager;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindowFactory;
+import com.intellij.util.messages.MessageBus;
 import com.intellij.util.ui.FormBuilder;
+import de.drazil.ptah.settings.PtahProjectSettings;
+import de.drazil.ptah.settings.PtahProjectSettingsProvider;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -30,7 +38,12 @@ public class PtahTool implements ToolWindowFactory {
             startGeneratorButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                System.out.println("generator started...");
+                    DataContext dataContext = DataManager.getInstance().getDataContext();
+                    Project project = (Project) dataContext.getData(PlatformDataKeys.PROJECT);
+
+                    MessageBus messageBus = project.getMessageBus();
+                    PtahActionTopic publisher = messageBus.syncPublisher(PtahActionTopic.RUN_CODE_GENERATOR_TOPIC);
+                    publisher.generateCode();
                 }
             });
         }

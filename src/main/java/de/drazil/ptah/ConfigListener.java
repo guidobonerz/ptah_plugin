@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class PtahChangeListener implements BulkFileListener {
+public class ConfigListener implements BulkFileListener {
 
     @Override
     public void after(@NotNull List<? extends VFileEvent> events) {
