@@ -9,9 +9,8 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="Ptah" secondary="true" icon="AllIcons.Toolwindows.WebToolWindow" anchor="right"
+        <toolWindow id="Code Generator" secondary="true" icon="PtahIcons.Wand" anchor="right"
                     factoryClass="de.drazil.ptah.Ptah"/>
-
         <!--
          <applicationConfigurable parentId="tools" instance="de.drazil.ptah.settings.PtahSettingsConfigurable"
                                   id="de.drazil.ptah.settings.PtahSettingsConfigurable"
@@ -26,9 +25,19 @@
                 displayName="Ptah Code Generator"
                 nonDefaultProject="true"/>
         <projectService serviceImplementation="de.drazil.ptah.settings.PtahProjectSettingsProvider"/>
-
+        <postStartupActivity implementation="de.drazil.ptah.TemplateProcessor"/>
     </extensions>
-
+    <actions>
+        <action id="de.drazil.ptah.runCodeGenerator" class="de.drazil.ptah.RunCodeGeneratorAction"
+                text="Run Code Generator"
+                description="RunCodeGeneratorAction" icon="PtahIcons.Wand">
+            <keyboard-shortcut
+                    keymap="$default"
+                    first-keystroke="control alt P"/>
+            <add-to-group group-id="BuildMenu" anchor="first"/>
+            <add-to-group group-id="ToolbarRunGroup" anchor="first"/>
+        </action>
+    </actions>
     <applicationListeners>
         <listener
                 class="de.drazil.ptah.ConfigListener"

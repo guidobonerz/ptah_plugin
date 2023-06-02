@@ -11,7 +11,7 @@ import javax.swing.*;
 
 
 public class PtahSettingsConfigurable implements SearchableConfigurable {
-
+    public final static String PTAH_CONFIG_FILE_CHANGED = "PTAH_CONFIG_FILE_CHANGED";
     private PtahSettingsComponent settingsComponent = new PtahSettingsComponent();
     private Project project;
     private PtahProjectSettingsProvider settings;

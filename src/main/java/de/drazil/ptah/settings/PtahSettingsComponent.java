@@ -22,11 +22,10 @@ import java.util.Optional;
 public class PtahSettingsComponent {
     private JPanel mainPanel;
     private TextFieldWithBrowseButton pathToGeneratorExecutableTextField;
-    //private JBTextField pathToGeneratorExecutableTextField;
+    private TextFieldWithBrowseButton outputFolderTextField;
+    private TextFieldWithBrowseButton templateFolderTextField;
     private JBTextField projectPathTextField;
     private JBTextField configFileTextField;
-    private JBTextField templateFolderTextField;
-    private JBTextField outputFolderTextField;
     private JBCheckBox purgeOutputFoldersCheckBox;
     private JBCheckBox rebuildOnConfigModificationCheckBox;
     private JBCheckBox confirmActionsCheckBox;
@@ -92,16 +91,56 @@ public class PtahSettingsComponent {
         return configFileTextField;
     }
 
-    private JBTextField getTemplateFolderTextField() {
+    private TextFieldWithBrowseButton getTemplateFolderTextField() {
         if (templateFolderTextField == null) {
-            templateFolderTextField = new JBTextField();
+            templateFolderTextField = new TextFieldWithBrowseButton(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    FileChooserDescriptor fileDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
+                    fileDescriptor.setShowFileSystemRoots(true);
+                    fileDescriptor.setTitle("Configure Path");
+                    fileDescriptor.setDescription("Configure path to template folder");
+                    VirtualFile currentFile = LocalFileSystem.getInstance().findFileByPath(templateFolderTextField.getText());
+
+                    FileChooser.chooseFiles(
+                            fileDescriptor,
+                            null,
+                            Optional.ofNullable(currentFile).orElse(null),
+                            files -> {
+                                String path = files.get(0).getPath();
+                                templateFolderTextField.setText(path);
+                            }
+                    );
+                }
+            });
         }
         return templateFolderTextField;
     }
 
-    private JBTextField getOutputFolderTextField() {
+    private TextFieldWithBrowseButton getOutputFolderTextField() {
         if (outputFolderTextField == null) {
-            outputFolderTextField = new JBTextField();
+            outputFolderTextField = new TextFieldWithBrowseButton(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    FileChooserDescriptor fileDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
+                    fileDescriptor.setShowFileSystemRoots(true);
+                    fileDescriptor.setTitle("Configure Path");
+                    fileDescriptor.setDescription("Configure path to output folder");
+                    VirtualFile currentFile = LocalFileSystem.getInstance().findFileByPath(outputFolderTextField.getText());
+
+                    FileChooser.chooseFiles(
+                            fileDescriptor,
+                            null,
+                            Optional.ofNullable(currentFile).orElse(null),
+                            files -> {
+                                String path = files.get(0).getPath();
+                                outputFolderTextField.setText(path);
+                            }
+                    );
+                }
+            });
         }
         return outputFolderTextField;
     }
