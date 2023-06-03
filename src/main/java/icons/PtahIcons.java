@@ -3,7 +3,7 @@ package icons;
 
 import com.intellij.openapi.util.IconLoader;
 
-import javax.swing.*;
+import javax.swing.Icon;
 
 public interface PtahIcons {
     Icon Wand = IconLoader.getIcon("/images/wand.svg", PtahIcons.class);

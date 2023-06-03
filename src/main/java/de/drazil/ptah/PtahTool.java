@@ -3,13 +3,10 @@ package de.drazil.ptah;
 import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.ui.FormBuilder;
-import de.drazil.ptah.settings.PtahProjectSettings;
-import de.drazil.ptah.settings.PtahProjectSettingsProvider;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;

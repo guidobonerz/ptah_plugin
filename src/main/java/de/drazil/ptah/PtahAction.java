@@ -1,21 +1,12 @@
 package de.drazil.ptah;
 
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.process.CapturingProcessHandler;
-import com.intellij.execution.process.OSProcessHandler;
-import com.intellij.execution.process.ProcessHandler;
 import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
-import de.drazil.ptah.settings.PtahProjectSettings;
-import de.drazil.ptah.settings.PtahProjectSettingsProvider;
-
-import java.nio.charset.Charset;
 
 public class PtahAction extends AnAction {
 
