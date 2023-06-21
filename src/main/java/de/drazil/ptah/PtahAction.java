@@ -6,7 +6,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
-import com.intellij.util.messages.MessageBus;
 
 public class PtahAction extends AnAction {
 
@@ -14,26 +13,10 @@ public class PtahAction extends AnAction {
     public void actionPerformed(AnActionEvent e) {
         DataContext dataContext = DataManager.getInstance().getDataContext();
         Project project = (Project) dataContext.getData(PlatformDataKeys.PROJECT);
-        MessageBus messageBus = project.getMessageBus();
-        PtahActionTopic publisher = messageBus.syncPublisher(PtahActionTopic.RUN_CODE_GENERATOR_TOPIC);
-        publisher.generateCode();
-        /*
-        DataContext dataContext = DataManager.getInstance().getDataContext();
-        Project project = (Project) dataContext.getData(PlatformDataKeys.PROJECT);
-        PtahProjectSettingsProvider provider = ServiceManager.getService(project, PtahProjectSettingsProvider.class);
-        PtahProjectSettings settings = provider.getState();
-        String ptahExecutable = settings.pathToGeneratorExecutable;
-        String configFile = String.format("%s/%s", project.getBasePath(), settings.pathToConfigFile);
-        try {
-            GeneralCommandLine command = new GeneralCommandLine();
-            command.setExePath(ptahExecutable);
-            command.addParameter("--version");
-            ProcessHandler ph = new CapturingProcessHandler(
-                    command.createProcess(),
-                    Charset.defaultCharset(),
-                    command.getCommandLineString());
-            OSProcessHandler.checkEdtAndReadAction(ph);
-        } catch (Exception ex) {
-        }*/
+        //MessageBus messageBus = project.getMessageBus();
+        //PtahActionTopic publisher = messageBus.syncPublisher(PtahActionTopic.RUN_CODE_GENERATOR_TOPIC);
+        //publisher.generateCode();
+        GeneratorRunner.run(project);
+
     }
 }

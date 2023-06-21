@@ -8,7 +8,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.newvfs.BulkFileListener;
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent;
-import com.intellij.util.messages.MessageBus;
 import de.drazil.ptah.settings.PtahProjectSettings;
 import de.drazil.ptah.settings.PtahProjectSettingsProvider;
 import org.jetbrains.annotations.NotNull;
@@ -30,9 +29,10 @@ public class ConfigListener implements BulkFileListener {
                 String ptahExecutable = settings.pathToGeneratorExecutable;
                 String configFile = String.format("%s/%s", project.getBasePath(), settings.pathToConfigFile);
                 if (configFile.equals(vf.getPath())) {
-                    MessageBus messageBus = project.getMessageBus();
-                    PtahActionTopic publisher = messageBus.syncPublisher(PtahActionTopic.RUN_CODE_GENERATOR_TOPIC);
-                    publisher.generateCode();
+                    //MessageBus messageBus = project.getMessageBus();
+                    //PtahActionTopic publisher = messageBus.syncPublisher(PtahActionTopic.RUN_CODE_GENERATOR_TOPIC);
+                    //publisher.generateCode();
+                    GeneratorRunner.run(project);
                 }
             }
         }

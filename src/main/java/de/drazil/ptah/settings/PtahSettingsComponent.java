@@ -39,7 +39,7 @@ public class PtahSettingsComponent {
                 .addLabeledComponent("Executable", getPathToGeneratorExecutableTextField(), 1, true)
                 .addLabeledComponent("Configuration file", getConfigFileTextField(), 1, true)
                 .addLabeledComponent("Templatefolder", getTemplateFolderTextField(), 1, true)
-                .addLabeledComponent("Outputfolder", getOutputFolderTextField(), 1, true)
+                //.addLabeledComponent("Outputfolder", getOutputFolderTextField(), 1, true)
                 .addComponent(getPurgeOutputFoldersCheckBox(), 0)
                 .addComponent(getRebuildOnConfigModificationCheckBox(), 0)
                 .addComponent(getConfirmActionsCheckBox(), 0)
@@ -79,7 +79,7 @@ public class PtahSettingsComponent {
             projectPathTextField = new JBTextField();
             DataContext dataContext = DataManager.getInstance().getDataContext();
             Project project = (Project) dataContext.getData(PlatformDataKeys.PROJECT);
-            projectPathTextField.setText(project.getBasePath());
+            projectPathTextField.setText(project.getBasePath()+"/");
             projectPathTextField.setEnabled(false);
         }
         return projectPathTextField;
@@ -188,12 +188,17 @@ public class PtahSettingsComponent {
 
     @NotNull
     public String getPathToInputFolderText() {
-        return getTemplateFolderTextField().getText();
+        return  getTemplateFolderTextField().getText();
     }
 
     @NotNull
     public String getPathToOutputFolderText() {
-        return getOutputFolderTextField().getText();
+        return  getOutputFolderTextField().getText();
+    }
+
+    @NotNull
+    public String getPathToProjectFolderText() {
+        return getProjectPathTextField().getText();
     }
 
     public void setPathToGeneratorExecutableText(@NotNull String newText) {
@@ -210,6 +215,10 @@ public class PtahSettingsComponent {
 
     public void setOutputFolderText(@NotNull String newText) {
         getOutputFolderTextField().setText(newText);
+    }
+
+    public void setProjectFolderText(@NotNull String newText) {
+        getProjectPathTextField().setText(newText);
     }
 
     public void setPurgeOutputFolders(boolean newStatus) {

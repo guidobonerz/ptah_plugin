@@ -48,6 +48,7 @@ public class PtahSettingsConfigurable implements SearchableConfigurable {
         PtahProjectSettings ps = settings.getState();
         boolean modified = false;
 
+
         modified |= settingsComponent.getPathToConfigFileText().equals(ps.pathToConfigFile);
         modified |= settingsComponent.getPathToInputFolderText().equals(ps.pathToTemplateFolder);
         modified |= settingsComponent.getPathToOutputFolderText().equals(ps.pathToOutputFolder);
@@ -60,6 +61,7 @@ public class PtahSettingsConfigurable implements SearchableConfigurable {
     @Override
     public void apply() {
         PtahProjectSettings ps = settings.getState();
+
         ps.pathToGeneratorExecutable = settingsComponent.getPathToGeneratorExecutableText();
         ps.pathToConfigFile = settingsComponent.getPathToConfigFileText();
         ps.pathToTemplateFolder = settingsComponent.getPathToInputFolderText();
@@ -72,6 +74,7 @@ public class PtahSettingsConfigurable implements SearchableConfigurable {
     @Override
     public void reset() {
         PtahProjectSettings ps = settings.getState();
+
         settingsComponent.setPathToGeneratorExecutableText(ps.pathToGeneratorExecutable);
         settingsComponent.setConfigFileText(ps.pathToConfigFile);
         settingsComponent.setInputFolderText(ps.pathToTemplateFolder);

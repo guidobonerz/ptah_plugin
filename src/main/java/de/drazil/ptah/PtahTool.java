@@ -4,8 +4,8 @@ import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
-import com.intellij.util.messages.MessageBus;
 import com.intellij.util.ui.FormBuilder;
 
 import javax.swing.JButton;
@@ -19,7 +19,7 @@ public class PtahTool implements ToolWindowFactory {
 
     @Override
 
-    public void createToolWindowContent(com.intellij.openapi.project.Project project, com.intellij.openapi.wm.ToolWindow toolWindow) {
+    public void createToolWindowContent(Project project, ToolWindow toolWindow) {
 
         mainPanel = FormBuilder.createFormBuilder()
                 .addComponent(getStartGeneratorButton(), 0)
@@ -38,9 +38,10 @@ public class PtahTool implements ToolWindowFactory {
                     DataContext dataContext = DataManager.getInstance().getDataContext();
                     Project project = (Project) dataContext.getData(PlatformDataKeys.PROJECT);
 
-                    MessageBus messageBus = project.getMessageBus();
-                    PtahActionTopic publisher = messageBus.syncPublisher(PtahActionTopic.RUN_CODE_GENERATOR_TOPIC);
-                    publisher.generateCode();
+                    //MessageBus messageBus = project.getMessageBus();
+                    //PtahActionTopic publisher = messageBus.syncPublisher(PtahActionTopic.RUN_CODE_GENERATOR_TOPIC);
+                    //publisher.generateCode();
+                    GeneratorRunner.run(project);
                 }
             });
         }

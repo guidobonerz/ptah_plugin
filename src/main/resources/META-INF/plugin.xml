@@ -26,6 +26,10 @@
                 nonDefaultProject="true"/>
         <projectService serviceImplementation="de.drazil.ptah.settings.PtahProjectSettingsProvider"/>
         <postStartupActivity implementation="de.drazil.ptah.PtahStartupActivity"/>
+        <notificationGroup id="Custom Notification Group"
+                           displayType="BALLOON"
+                           key="notification.group.name"/>
+
     </extensions>
     <actions>
         <action id="de.drazil.ptah.runCodeGenerator" class="de.drazil.ptah.PtahAction"

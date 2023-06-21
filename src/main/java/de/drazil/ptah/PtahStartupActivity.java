@@ -1,5 +1,8 @@
 package de.drazil.ptah;
 
+import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.process.ProcessOutput;
+import com.intellij.execution.util.ExecUtil;
 import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
@@ -10,8 +13,6 @@ import com.intellij.util.messages.MessageBus;
 import de.drazil.ptah.settings.PtahProjectSettings;
 import de.drazil.ptah.settings.PtahProjectSettingsProvider;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.InputStream;
 
 public class PtahStartupActivity implements StartupActivity {
 
@@ -29,18 +30,35 @@ public class PtahStartupActivity implements StartupActivity {
                 String ptahExecutable = settings.pathToGeneratorExecutable;
                 String configFile = String.format("%s/%s", project.getBasePath(), settings.pathToConfigFile);
 
+
+                //System.out.printf("config: %s\n",project.getBasePath() + "/" + settings.pathToConfigFile);
+                //System.out.printf("input: %s\n",project.getBasePath() + "/" + settings.pathToTemplateFolder);
+                //System.out.printf("output: %s\n",project.getBasePath());
+
+                var executor = java.util.concurrent.Executors.newSingleThreadExecutor();
+
+                var processBuilder = new ProcessBuilder();
+
+                //processBuilder.command("cmd.exe", "/c", "ping -n 3 google.com");
+                processBuilder.command(ptahExecutable, "-cf", project.getBasePath() + "/" + settings.pathToConfigFile, "-ibf", project.getBasePath() + "/" + settings.pathToTemplateFolder, "-obf", project.getBasePath(), "-p", "false");
+                //processBuilder.command("cmd.exe", "/C", "echo", "This is ProcessBuilder Example from JCG");//, "-cf", project.getBasePath() + "/" + settings.pathToConfigFile, "-ibf", project.getBasePath() + "/" + settings.pathToTemplateFolder, "-obf", project.getBasePath(), "-p", "false");
+                GeneralCommandLine command = new GeneralCommandLine();
+                command.setExePath(ptahExecutable);
                 try {
-                    ProcessBuilder builder = new ProcessBuilder();
-                    builder.command(ptahExecutable, "--version");
-                    Process process = builder.start();
-                    int exitCode = process.waitFor();
-                    InputStream in = process.getInputStream();
-                    while (in.available() != 0) {
-                        System.out.print((char) in.read());
-                    }
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                ProcessOutput outpout = ExecUtil.execAndGetOutput(command);
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    }).start();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+
             }
         });
     }
