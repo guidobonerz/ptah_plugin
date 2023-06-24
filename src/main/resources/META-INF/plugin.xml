@@ -2,7 +2,7 @@
     <id>de.drazil.ptah</id>
     <name>Ptah</name>
     <depends>com.intellij.modules.platform</depends>
-    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">Gonero Buidz</vendor>
+    <vendor email="guido.bonerz@drazil.de" url="https://www.drazil.de">Guido Bonerz</vendor>
     <description><![CDATA[
     Template based Codegenerator
   ]]></description>
@@ -26,9 +26,9 @@
                 nonDefaultProject="true"/>
         <projectService serviceImplementation="de.drazil.ptah.settings.PtahProjectSettingsProvider"/>
         <postStartupActivity implementation="de.drazil.ptah.PtahStartupActivity"/>
-        <notificationGroup id="Custom Notification Group"
+        <notificationGroup id="PtahNotification"
                            displayType="BALLOON"
-                           key="notification.group.name"/>
+                           key="de.drazil.ptah.notification"/>
 
     </extensions>
     <actions>

@@ -28,7 +28,8 @@ public class ConfigListener implements BulkFileListener {
                 PtahProjectSettings settings = provider.getState();
                 String ptahExecutable = settings.pathToGeneratorExecutable;
                 String configFile = String.format("%s/%s", project.getBasePath(), settings.pathToConfigFile);
-                if (configFile.equals(vf.getPath())) {
+
+                if (configFile.equals(vf.getPath()) && settings.rebuildOnConfigModification) {
                     //MessageBus messageBus = project.getMessageBus();
                     //PtahActionTopic publisher = messageBus.syncPublisher(PtahActionTopic.RUN_CODE_GENERATOR_TOPIC);
                     //publisher.generateCode();
