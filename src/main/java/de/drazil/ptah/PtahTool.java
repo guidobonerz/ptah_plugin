@@ -29,7 +29,7 @@ public class PtahTool implements ToolWindowFactory {
         consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).getConsole();
         Content content = toolWindow.getContentManager().getFactory().createContent(consoleView.getComponent(), "Path Console", false);
         toolWindow.getContentManager().addContent(content);
-        consoleView.print("Ptah has started", ConsoleViewContentType.NORMAL_OUTPUT);
+        consoleView.print("Ptah has been started", ConsoleViewContentType.NORMAL_OUTPUT);
 
 
         /*
