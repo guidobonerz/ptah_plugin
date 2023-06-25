@@ -46,15 +46,15 @@ public class GeneratorRunner {
                 consoleView.print(output.getStdout(), ConsoleViewContentType.NORMAL_OUTPUT);
                 PtahNotifier.notify(project, "Code generation successful, see console in tool window", com.intellij.notification.NotificationType.INFORMATION);
             } else {
-                consoleView.print("Code generation unsuccessful\n", ConsoleViewContentType.NORMAL_OUTPUT);
-                consoleView.print(output.getStderr(), ConsoleViewContentType.NORMAL_OUTPUT);
+                consoleView.print("Code generation unsuccessful\n", ConsoleViewContentType.ERROR_OUTPUT);
+                consoleView.print(output.getStderr(), ConsoleViewContentType.ERROR_OUTPUT);
                 PtahNotifier.notify(project, "Code generation unsuccessful, see console in tool window", com.intellij.notification.NotificationType.ERROR);
             }
 
 
         } catch (Exception ex) {
-            consoleView.print("Code generation unsuccessful\n", ConsoleViewContentType.NORMAL_OUTPUT);
-            consoleView.print(ex.getMessage(), ConsoleViewContentType.NORMAL_OUTPUT);
+            consoleView.print("Code generation unsuccessful\n", ConsoleViewContentType.ERROR_OUTPUT);
+            consoleView.print(ex.getMessage(), ConsoleViewContentType.ERROR_OUTPUT);
             PtahNotifier.notify(project, "Code generation unsuccessful, see console in tool window", com.intellij.notification.NotificationType.ERROR);
             ex.printStackTrace();
         }
