@@ -7,6 +7,8 @@ import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.execution.util.ExecUtil;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.MessageDialogBuilder;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.ui.content.Content;
@@ -24,39 +26,51 @@ public class GeneratorRunner {
         String configFile = String.format("%s/%s", project.getBasePath(), settings.pathToConfigFile);
         ToolWindow toolWindow = ToolWindowManager.getInstance(project).getToolWindow("Code Generator");
 
-        Content content = toolWindow.getContentManager().findContent("Path Console");
-        ConsoleView consoleView = (ConsoleView) content.getComponent();
-        consoleView.clear();
-        try {
-            GeneralCommandLine command = new GeneralCommandLine();
-            command.setExePath(ptahExecutable);
-            command.addParameter("-cf");
-            command.addParameter(configFile);
-            command.addParameter("-ibf");
-            command.addParameter(project.getBasePath() + "/" + settings.pathToTemplateFolder);
-            command.addParameter("-obf");
-            command.addParameter(project.getBasePath());
-            if (settings.purgeOutFolders) {
-                command.addParameter("-p");
-            }
-            ProcessOutput output = ExecUtil.execAndGetOutput(command);
-            if (output.getExitCode() == 0) {
-                com.intellij.openapi.vfs.VirtualFileManager.getInstance().syncRefresh();
-                consoleView.print("Code generation successful\n", ConsoleViewContentType.NORMAL_OUTPUT);
-                consoleView.print(output.getStdout(), ConsoleViewContentType.NORMAL_OUTPUT);
-                PtahNotifier.notify(project, "Code generation successful, see console in tool window", com.intellij.notification.NotificationType.INFORMATION);
-            } else {
+        boolean proceed = true;
+
+        if (settings.confirmActions) {
+            final MessageDialogBuilder.YesNo dialogBuilder =
+                    MessageDialogBuilder.yesNo("Confirm action", "Would you like to proceed generating code?")
+                            .yesText("Yes")
+                            .noText("No")
+                            .icon(Messages.getQuestionIcon());
+            proceed = dialogBuilder.guessWindowAndAsk();
+        }
+        if (proceed) {
+            Content content = toolWindow.getContentManager().findContent("Path Console");
+            ConsoleView consoleView = (ConsoleView) content.getComponent();
+            consoleView.clear();
+            try {
+                GeneralCommandLine command = new GeneralCommandLine();
+                command.setExePath(ptahExecutable);
+                command.addParameter("-cf");
+                command.addParameter(configFile);
+                command.addParameter("-ibf");
+                command.addParameter(project.getBasePath() + "/" + settings.pathToTemplateFolder);
+                command.addParameter("-obf");
+                command.addParameter(project.getBasePath());
+                if (settings.purgeOutFolders) {
+                    command.addParameter("-p");
+                }
+                ProcessOutput output = ExecUtil.execAndGetOutput(command);
+                if (output.getExitCode() == 0) {
+                    com.intellij.openapi.vfs.VirtualFileManager.getInstance().syncRefresh();
+                    consoleView.print("Code generation successful\n", ConsoleViewContentType.NORMAL_OUTPUT);
+                    consoleView.print(output.getStdout(), ConsoleViewContentType.NORMAL_OUTPUT);
+                    PtahNotifier.notify(project, "Code generation successful, see console in tool window", com.intellij.notification.NotificationType.INFORMATION);
+                } else {
+                    consoleView.print("Code generation unsuccessful\n", ConsoleViewContentType.ERROR_OUTPUT);
+                    consoleView.print(output.getStderr(), ConsoleViewContentType.ERROR_OUTPUT);
+                    PtahNotifier.notify(project, "Code generation unsuccessful, see console in tool window", com.intellij.notification.NotificationType.ERROR);
+                }
+
+
+            } catch (Exception ex) {
                 consoleView.print("Code generation unsuccessful\n", ConsoleViewContentType.ERROR_OUTPUT);
-                consoleView.print(output.getStderr(), ConsoleViewContentType.ERROR_OUTPUT);
+                consoleView.print(ex.getMessage(), ConsoleViewContentType.ERROR_OUTPUT);
                 PtahNotifier.notify(project, "Code generation unsuccessful, see console in tool window", com.intellij.notification.NotificationType.ERROR);
+                ex.printStackTrace();
             }
-
-
-        } catch (Exception ex) {
-            consoleView.print("Code generation unsuccessful\n", ConsoleViewContentType.ERROR_OUTPUT);
-            consoleView.print(ex.getMessage(), ConsoleViewContentType.ERROR_OUTPUT);
-            PtahNotifier.notify(project, "Code generation unsuccessful, see console in tool window", com.intellij.notification.NotificationType.ERROR);
-            ex.printStackTrace();
         }
     }
 }
